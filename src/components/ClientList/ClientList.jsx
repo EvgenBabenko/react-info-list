@@ -1,9 +1,7 @@
 import React from 'react';
-import Client from './Client'
+import Client from '../Client'
 
-import clients from '../clients.json'
-
-export default () => 
+export default ({ clients }) => 
     <div>
         {clients.map((client, index) =>
             <Client 
