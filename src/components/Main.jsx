@@ -1,3 +1,9 @@
 import React from 'react';
+import ClientDetail from './ClientDetail'
 
-export default () => <div className="main">Main</div>
+import clients from '../clients.json'
+
+export default () =>
+    <div className="main">
+        <ClientDetail client={clients[0]} />
+    </div>
