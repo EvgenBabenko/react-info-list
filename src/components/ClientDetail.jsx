@@ -1,20 +1,21 @@
-import React from 'react';
+import React from 'react'
+import { Image, Header } from 'semantic-ui-react'
 
 export default ({ client: { general: { avatar, firstName }, job: { title, company }, address, contact } }) => {
     const renderAllValues = (elem) => Object.values(elem).map((item, index) => <div key={index}>{item}</div>)
     
     return (
         <React.Fragment>
-            <img src={avatar} alt=""/>
+            <Image src={avatar} circular />
             <div>
-                <h1>{firstName}</h1>
+                <Header as='h1'>{firstName}</Header>
                 <div>{title} - {company}</div>
                 <div>
-                    <h3>Address</h3>
+                    <Header as='h3'>Address</Header>
                     {renderAllValues(address)}
                 </div>
                 <div>
-                    <h3>Contact</h3>
+                    <Header as='h3'>Contact</Header>
                     {renderAllValues(contact)}
                 </div>
             </div>

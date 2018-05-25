@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import flatten from 'flat'
 
 import ClientList from './ClientList'
 import NoItems from '../NoItems'
@@ -11,11 +12,9 @@ import clients from '../../clients.json'
 class ClientListWrapper extends Component {
     componentDidMount() {
         store.dispatch(clientsAction.getClients(clients))
-        console.log(1)
     }
     
     render() {
-        console.log(111, this.props.clients)
         return (
             this.props.clients.length
                 ? <ClientList {...this.props} />
@@ -25,7 +24,7 @@ class ClientListWrapper extends Component {
 }
 
 const getFilteredClients = (clients, search) =>
-    clients.filter(({ general: { firstName } }) => new RegExp(search, 'gi').test(firstName))
+    clients.filter((client) => Object.values(flatten(client)).some(item => new RegExp(search, 'gi').test(item)))
 
 const mapStateToProps = (state) => ({
     clients: getFilteredClients(state.clients, state.search)
