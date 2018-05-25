@@ -9,6 +9,7 @@ import clients from '../../clients.json'
 class ClientListWrapper extends Component {
     componentDidMount() {
         store.dispatch(clientsAction.getClients(clients))
+        console.log(1)
     }
     
     render() {
@@ -18,8 +19,11 @@ class ClientListWrapper extends Component {
     }
 }
 
+const getFilteredClients = (clients, search) =>
+    clients.filter(({ general: { firstName } }) => new RegExp(search, 'gi').test(firstName))
+
 const mapStateToProps = (state) => ({
-    clients: state.clients
+    clients: getFilteredClients(state.clients, state.search)
 })
 
 export default connect(mapStateToProps)(ClientListWrapper)
