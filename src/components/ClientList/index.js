@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ClientList from './ClientList'
 import store from '../../modules/store'
 import { clientsAction } from '../../modules/clients'
+import { activeAction } from '../../modules/active'
 import clients from '../../clients.json'
 
 class ClientListWrapper extends Component {
@@ -26,4 +27,8 @@ const mapStateToProps = (state) => ({
     clients: getFilteredClients(state.clients, state.search)
 })
 
-export default connect(mapStateToProps)(ClientListWrapper)
+const mapDispatchToProps = dispatch => ({
+    clickClientId: id => dispatch(activeAction.setActive(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClientListWrapper)
