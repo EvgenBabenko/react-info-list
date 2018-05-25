@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default ({ client: { general: { avatar, firstName }, job: { title, company }, address, contact } }) => {
-    const toAs = (elem) => Object.values(elem).map((item, index) => <div key={index}>{item}</div>)
+    const renderAllValues = (elem) => Object.values(elem).map((item, index) => <div key={index}>{item}</div>)
     
     return (
         <React.Fragment>
@@ -11,11 +11,11 @@ export default ({ client: { general: { avatar, firstName }, job: { title, compan
                 <div>{title} - {company}</div>
                 <div>
                     <h3>Address</h3>
-                    {toAs(address)}
+                    {renderAllValues(address)}
                 </div>
                 <div>
                     <h3>Contact</h3>
-                    {toAs(contact)}
+                    {renderAllValues(contact)}
                 </div>
             </div>
         </React.Fragment>

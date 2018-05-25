@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import ClientList from './ClientList'
+import NoItems from '../NoItems'
 import store from '../../modules/store'
 import { clientsAction } from '../../modules/clients'
 import { activeAction } from '../../modules/active'
@@ -14,8 +15,11 @@ class ClientListWrapper extends Component {
     }
     
     render() {
+        console.log(111, this.props.clients)
         return (
-            <ClientList {...this.props} />
+            this.props.clients.length
+                ? <ClientList {...this.props} />
+                : <NoItems />
         )
     }
 }
