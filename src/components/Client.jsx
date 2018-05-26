@@ -1,10 +1,12 @@
 import React from 'react';
+import { Image, Item } from 'semantic-ui-react'
 
-export default ({ general, job, onClick }) =>
-    <div onClick={onClick}>
-        <img src={general.avatar} alt=""/>
-        <div>
-            <div>{general.firstName}</div>
-            <div>{job.title}</div>
-        </div>
-    </div>
+export default ({ general: { avatar, firstName }, job: { title }, onClick }) =>
+    <Item onClick={onClick}>
+        <Image src={avatar} circular />
+
+        <Item.Content>
+            <Item.Header content={firstName} />
+            <Item.Description content={title} />
+        </Item.Content>
+    </Item>
