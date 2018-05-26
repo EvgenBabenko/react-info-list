@@ -1,17 +1,16 @@
 import React from 'react';
-import Client from '../Client'
 import { Item } from 'semantic-ui-react'
 
+import Client from '../Client'
+
 const style = {
-    clientList: {
-        height: '500px',
-        overflowY: 'scroll',
-        margin: '0'
-    }
+    height: '500px',
+    overflowY: 'scroll',
+    margin: '0'
 }
 
 export default ({ clients, clickClientId }) => 
-    <Item.Group divided style={style.clientList}>
+    <Item.Group divided style={style}>
         {clients.map((client, index) =>
             <Client 
                 key={index}

@@ -1,12 +1,11 @@
 import React from 'react';
-import ClientList from './ClientList'
-import Search from './Search'
 import { Sticky } from 'semantic-ui-react'
 
+import ClientList from './ClientList'
+import Search from './Search'
+
 export default () => 
-    <div className="aside">
-        <Sticky>
-            <Search />
-        </Sticky>
+    <React.Fragment>
+        <Sticky children={<Search />} />
         <ClientList />
-    </div>
+    </React.Fragment>

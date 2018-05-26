@@ -1,36 +1,48 @@
 import React from 'react'
-import { Image, Header, Grid, Segment, Item } from 'semantic-ui-react'
+import { Header, Grid, Segment, Item, List, Container } from 'semantic-ui-react'
+
+const mapProps = {
+    email: 'mail',
+    phone: 'phone',
+    street: 'address book',
+    city: 'marker',
+    zipCode: 'location arrow',
+    country: 'world'
+}
+
+const renderValues = (object) => Object.keys(object).map((key, index) =>
+    <List.Item key={index} icon={mapProps[key]} content={object[key]} />
+)
+
+const Info = (content, children) => 
+    <Segment>
+        <Header as='h3' content={content} />
+        <List children={children} />
+    </Segment>
 
 export default ({ client: { general: { avatar, firstName }, job: { title, company }, address, contact } }) => {
-    const renderAllValues = (elem) => Object.values(elem).map((item, index) => <div key={index}>{item}</div>)
-    
     return (
-        <React.Fragment>
-            <Item>
-                <Image src={avatar} circular />
+        <Container>
+            <Item.Group>
+                <Item>
+                    <Item.Image src={avatar} />
+                    <Item.Content>
+                        <Item.Header as='h1' content={firstName} />
+                        <Item.Meta content={`${title} - ${company}`} />
+                    </Item.Content>
+                </Item>
+            </Item.Group>
 
-                <Item.Content>
-                    <Item.Header as='h1' content={firstName} />
-                    <Item.Meta>{title} - {company}</Item.Meta>
-                </Item.Content>
-            </Item>
-
-            <Grid columns={2} stackable divided>
+            <Grid columns={2} stackable divided >
                 <Grid.Row stretched>
-                    <Grid.Column>
-                        <Segment>
-                            <Header as='h3' content='Address' />
-                            {renderAllValues(address)}
-                        </Segment>
+                    <Grid.Column >
+                        {Info('Address', renderValues(address))}
                     </Grid.Column>
                     <Grid.Column>
-                        <Segment>
-                            <Header as='h3' content='Contact' />
-                            {renderAllValues(contact)}
-                        </Segment>
+                        {Info('Contact', renderValues(contact))}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-        </React.Fragment>
+        </Container>
     )
 }
