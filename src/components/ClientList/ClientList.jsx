@@ -11,10 +11,10 @@ const style = {
 
 export default ({ clients, clickClientId }) => 
     <Item.Group divided style={style}>
-        {clients.map((client, index) =>
+        {clients.map(client =>
             <Client 
-                key={index}
-                onClick={ () => clickClientId(index) }
+                key={client.id}
+                onClick={ () => clickClientId(client.id) }
                 {...client}
             />
         )}

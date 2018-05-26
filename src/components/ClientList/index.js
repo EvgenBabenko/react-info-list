@@ -7,12 +7,23 @@ import NoItems from '../NoItems'
 import store from '../../modules/store'
 import { clientsAction } from '../../modules/clients'
 import { activeAction } from '../../modules/active'
-import { filterAction } from '../../modules/filter'
 import clients from '../../clients.json'
+
+const addFieldID = data => {
+    if (data[0].id) return;
+
+    let id = 0;
+
+    const copy = JSON.parse(JSON.stringify(data));
+
+    copy.map(item => item.id = id++)
+
+    return copy
+}
 
 class ClientListWrapper extends Component {
     componentDidMount() {
-        store.dispatch(clientsAction.getClients(clients))
+        store.dispatch(clientsAction.getClients(addFieldID(clients)))
     }
     
     render() {
@@ -24,11 +35,10 @@ class ClientListWrapper extends Component {
     }
 }
 
-const getFilteredClients = (clients, search) => {
-    const filtered = clients.filter((client) => Object.values(flatten(client)).some(item => new RegExp(search, 'gi').test(item)))
-    store.dispatch(filterAction.setFilter(filtered))
-    return filtered
-}
+const getFilteredClients = (clients, search) => 
+    clients.filter((client) => Object.values(flatten(client))
+        .some(item => new RegExp(search, 'gi').test(item))
+    )
 
 const mapStateToProps = (state) => ({
     clients: getFilteredClients(state.clients, state.search)

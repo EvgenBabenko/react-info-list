@@ -20,14 +20,14 @@ const Info = (content, children) =>
         <List children={children} />
     </Segment>
 
-export default ({ client: { general: { avatar, firstName }, job: { title, company }, address, contact } }) => {
+export default ({ client: { general: { avatar, firstName, lastName }, job: { title, company }, address, contact } }) => {
     return (
         <Container>
             <Item.Group>
                 <Item>
                     <Item.Image src={avatar} />
                     <Item.Content>
-                        <Item.Header as='h1' content={firstName} />
+                        <Item.Header as='h1' content={`${firstName} ${lastName}`} />
                         <Item.Meta content={`${title} - ${company}`} />
                     </Item.Content>
                 </Item>
