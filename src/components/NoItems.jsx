@@ -1,8 +1,8 @@
 import React from 'react';
 import { Header, Icon } from 'semantic-ui-react'
 
-export default () =>
+export default ({ content }) =>
     <Header as='h1' icon>
         <Icon name='announcement' />
-        No Items!
+        {content}
     </Header>

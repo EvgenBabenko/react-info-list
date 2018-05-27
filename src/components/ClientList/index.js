@@ -28,7 +28,7 @@ class ClientListWrapper extends Component {
         return (
             this.props.clients.length
                 ? <ClientList {...this.props} />
-                : <NoItems />
+                : <NoItems content='No data to show!' />
         )
     }
 }
