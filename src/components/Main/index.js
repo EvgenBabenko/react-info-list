@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
 
 import Main from './Main'
+import { findItem } from '../../selectors'
 
 const mapStateToProps = state => ({
-    client: state.clients[state.active]
+    client: findItem(state)
 })
 
 export default connect(mapStateToProps)(Main)

@@ -14,7 +14,7 @@ const renderValues = (object) => Object.keys(object).map((key, index) =>
     <List.Item key={index} icon={mapProps[key]} content={object[key]} />
 )
 
-const Info = (content, children) => 
+const Informations = (content, children) => 
     <Segment>
         <Header as='h3' content={content} />
         <List children={children} />
@@ -36,10 +36,10 @@ export default ({ client: { general: { avatar, firstName, lastName }, job: { tit
             <Grid columns={2} stackable divided >
                 <Grid.Row stretched>
                     <Grid.Column >
-                        {Info('Address', renderValues(address))}
+                        {Informations('Address', renderValues(address))}
                     </Grid.Column>
                     <Grid.Column>
-                        {Info('Contact', renderValues(contact))}
+                        {Informations('Contact', renderValues(contact))}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

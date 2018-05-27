@@ -1,28 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import flatten from 'flat'
 
 import ClientList from './ClientList'
 import NoItems from '../NoItems'
 import store from '../../modules/store'
 import { clientsAction } from '../../modules/clients'
 import { activeAction } from '../../modules/active'
+import { getFilteredClients } from '../../selectors'
+import { addFieldID } from '../../utils'
 import clients from '../../clients.json'
-
-const addFieldID = data => {
-    if (data[0].id) return;
-
-    let id = 0;
-
-    const copy = JSON.parse(JSON.stringify(data));
-
-    copy.map(item => item.id = id++)
-
-    return copy
-}
 
 class ClientListWrapper extends Component {
     componentDidMount() {
+        /*
+        fetch data from server and put response.json() instead clients, like:
+
+        fetch(url)
+            .then(responce => responce.json())
+            .then(data => store.dispatch(clientsAction.getClients(addFieldID(data))))
+            .catch(error => console.error(error))
+        */
+       
         store.dispatch(clientsAction.getClients(addFieldID(clients)))
     }
     
@@ -35,13 +33,8 @@ class ClientListWrapper extends Component {
     }
 }
 
-const getFilteredClients = (clients, search) => 
-    clients.filter((client) => Object.values(flatten(client))
-        .some(item => new RegExp(search, 'gi').test(item))
-    )
-
 const mapStateToProps = (state) => ({
-    clients: getFilteredClients(state.clients, state.search)
+    clients: getFilteredClients(state)
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,14 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux'
-import 'semantic-ui-css/semantic.min.css';
 
-import App from './App';
-import store from './modules/store'
+import App from './Components/App';
 
-render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
-);  
+render(<App />, document.getElementById('root'));  
